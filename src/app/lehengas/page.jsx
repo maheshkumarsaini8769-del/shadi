@@ -8,7 +8,7 @@ import FilterSidebar from "@/components/FilterSidebar";
 import { SlidersHorizontal, ChevronDown } from "lucide-react";
 
 export default function LehengasPage() {
-  const [selectedCategories, setSelectedCategories] = useState(["Bridal Lehengas"]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [priceRange, setPriceRange] = useState(200000);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedFabrics, setSelectedFabrics] = useState([]);

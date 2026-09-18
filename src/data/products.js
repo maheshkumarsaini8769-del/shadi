@@ -1,4 +1,4 @@
-﻿export const collections = [
+export const collections = [
   {
     id: "bridal-lehengas",
     name: "Bridal Lehengas",
@@ -509,6 +509,284 @@ export const products = [
       { title: "Pure Leather", desc: "Soft bite-free genuine leather" },
       { title: "Hand Embroidered", desc: "Matching lehenga threadwork" },
       { title: "Artisan Made", desc: "Hand-stitched in Rajasthan" }
+    ]
+  },
+  {
+    id: "maharani-maroon-velvet-lehenga",
+    name: "Maharani Maroon Velvet Bridal Lehenga",
+    subtitle: "Royal deep crimson-maroon velvet lehenga encrusted with heritage Mughal zardozi and antique gold bullion work.",
+    category: "Bridal Lehengas",
+    section: "lehenga",
+    price: 154999,
+    originalPrice: 175000,
+    discount: "11% OFF",
+    rating: 5.0,
+    reviews: 94,
+    isFeatured: true,
+    isBestSeller: true,
+    colors: [
+      { name: "Maharani Maroon", hex: "#4A0E17" },
+      { name: "Royal Crimson", hex: "#8A1C2C" }
+    ],
+    selectedColor: "Maharani Maroon",
+    fabric: "Micro Velvet & Pure Silk",
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    images: [
+      "/images/products/lehenga-maharani-maroon.jpg",
+      "/images/products/lehenga-wine-velvet.jpg",
+      "/images/hero-bride.jpg"
+    ],
+    description: "An ode to royal Rajasthani heritage, this lehenga is handcrafted in micro-velvet with antique gold bullion zardozi, semi-precious kundan accents, and fine pita work. Paired with a heavily worked choli and dual dupattas.",
+    details: [
+      "Heavy micro-velvet kalidar lehenga with 5.5-meter royal flare",
+      "Hand-embroidered zardozi, dabka, and pearl jaal work",
+      "Padded choli with sweetheart neckline and latkan tie-backs",
+      "Dual dupattas: Rich velvet trailing veil + lightweight gossamer organza drape",
+      "Complimentary personalized bridal monogram hand-embroidery"
+    ],
+    fabricCare: [
+      "Fabric: 100% Rich Micro-Velvet & Tissue Organza",
+      "Dry clean only by luxury bridal care specialists",
+      "Preserve in premium muslin storage bags"
+    ],
+    delivery: [
+      "Insured Pan-India Express Delivery in 5-7 business days",
+      "Custom made-to-measure tailoring available in 14 days",
+      "Worldwide insured express shipping"
+    ],
+    features: [
+      { title: "200+ Craft Hours", desc: "Hand-worked by Jaipur master artisans" },
+      { title: "Heritage Velvet", desc: "Plush micro-velvet with royal drape" },
+      { title: "Dual Dupatta", desc: "Includes sheer veil & royal border drape" },
+      { title: "Bespoke Fit", desc: "Custom stitched to your exact measurements" }
+    ]
+  },
+  {
+    id: "crimson-kanjeevaram-silk-saree",
+    name: "Crimson Kanjeevaram Pure Silk Saree",
+    subtitle: "Authentic Kanchipuram bridal weave with rich 2.5G pure gold zari korvai borders and temple motifs.",
+    category: "Bridal Sarees",
+    section: "saree",
+    price: 56999,
+    originalPrice: 68000,
+    discount: "16% OFF",
+    rating: 4.9,
+    reviews: 68,
+    isFeatured: true,
+    colors: [
+      { name: "Bridal Crimson", hex: "#8B1824" },
+      { name: "Kumkum Red", hex: "#9E1E2C" }
+    ],
+    selectedColor: "Bridal Crimson",
+    fabric: "100% Pure Mulberry Silk",
+    sizes: ["Free Size (6.3m with blouse piece)"],
+    images: [
+      "/images/products/saree-crimson-kanjeevaram.jpg",
+      "/images/cat-saree.jpg"
+    ],
+    description: "Handwoven in the temple city of Kanchipuram, this authentic bridal silk saree showcases intricate Mayil (peacock) and Rudraksha zari motifs woven with real certified gold zari threads. An eternal bridal heirloom.",
+    details: [
+      "Silk Mark Certified 100% pure mulberry silk",
+      "Heavy korvai contrast zari border with intricate temple architecture motifs",
+      "Grand pallu with dense pure gold zari brocade work",
+      "Includes unstitched matching heavy brocade silk blouse fabric (85 cm)"
+    ],
+    fabricCare: [
+      "Pure Mulberry Silk with Tested Real Gold Zari",
+      "Dry clean only. Roll in muslin cloth with cedar balls",
+      "Change fold every 6 months to maintain zari luster"
+    ],
+    delivery: [
+      "Ready to ship: Dispatched within 48 hours",
+      "Complimentary fall, pico, and tassel detailing included",
+      "Delivered in bespoke Shadi wooden keepsake box"
+    ],
+    features: [
+      { title: "Silk Mark Certified", desc: "100% authentic pure mulberry silk" },
+      { title: "Real Zari", desc: "Tested gold & silver thread korvai weave" },
+      { title: "Complimentary Pico", desc: "Finished fall and handcrafted tassels" },
+      { title: "Heirloom Weave", desc: "Crafted to last through generations" }
+    ]
+  },
+  {
+    id: "mustard-haldi-organza-saree",
+    name: "Mustard Haldi Organza Silk Saree",
+    subtitle: "Luminous turmeric yellow organza saree adorned with handcrafted gota patti and delicate mirror accents.",
+    category: "Festive Sarees",
+    section: "saree",
+    price: 32999,
+    originalPrice: 38000,
+    discount: "13% OFF",
+    rating: 4.9,
+    reviews: 47,
+    isFeatured: true,
+    colors: [
+      { name: "Turmeric Mustard", hex: "#E5A93C" },
+      { name: "Marigold Gold", hex: "#F2B84B" }
+    ],
+    selectedColor: "Turmeric Mustard",
+    fabric: "Pure Organza Silk",
+    sizes: ["Free Size (6.3m with blouse piece)"],
+    images: [
+      "/images/products/saree-mustard-haldi.jpg",
+      "/images/cat-saree.jpg"
+    ],
+    description: "A glowing turmeric and mustard yellow festive saree, ideal for vibrant Haldi, Mehendi, and joyous morning wedding rituals. Decorated with delicate Rajasthani gota patti borders, mirror work, and subtle resham accents.",
+    details: [
+      "Ultra-lightweight pure organza silk with natural sheen",
+      "Delicate floral gota patti and foil mirror hand embroidery",
+      "Scalloped hand-finished border detailing",
+      "Includes unstitched raw silk blouse piece with matching embroidery"
+    ],
+    fabricCare: [
+      "Fabric: 100% Pure Organza Silk",
+      "Dry clean only",
+      "Iron on low silk heat with protective cloth"
+    ],
+    delivery: [
+      "Dispatched within 2-3 business days",
+      "Free express bridal shipping all across India"
+    ],
+    features: [
+      { title: "Featherlight", desc: "Effortless graceful drape for day events" },
+      { title: "Gota Patti Work", desc: "Authentic Rajasthani hand embroidery" },
+      { title: "Vibrant Haldi Glow", desc: "Photogenic turmeric hue for pre-wedding celebrations" },
+      { title: "Matching Blouse", desc: "Pure raw silk embroidered blouse fabric" }
+    ]
+  },
+  {
+    id: "ivory-pearl-cape-sharara",
+    name: "Ivory Pearl Cape Sharara Set",
+    subtitle: "Contemporary ivory champagne tiered sharara set paired with a crystal and pearl hand-embroidered sheer cape.",
+    category: "Indo-Western",
+    section: "indo-western",
+    price: 72999,
+    originalPrice: 85000,
+    discount: "14% OFF",
+    rating: 5.0,
+    reviews: 53,
+    isFeatured: true,
+    colors: [
+      { name: "Ivory Champagne", hex: "#E8E0D5" },
+      { name: "Blush Gold", hex: "#E8D5C8" }
+    ],
+    selectedColor: "Ivory Champagne",
+    fabric: "Georgette & Sheer Organza",
+    sizes: ["XS", "S", "M", "L", "XL"],
+    images: [
+      "/images/products/indowestern-ivory-sharara.jpg",
+      "/images/cat-indo-western.jpg"
+    ],
+    description: "Designed for Sangeet, Cocktail, and modern wedding receptions. This 3-piece ensemble features a hand-embellished bustier, flowing tiered georgette sharara pants, and a floor-sweeping sheer cape encrusted with pearls and crystals.",
+    details: [
+      "3-Piece Set: Embroidered bustier, tiered flared sharara, and floor-length sheer cape",
+      "Adorned with Swarovski crystals, freshwater seed pearls, and silver cutdana",
+      "Concealed side zip on bustier with supportive boning structure",
+      "Sharara features 4 tiers of voluminous gathers with comfortable elasticated waistband"
+    ],
+    fabricCare: [
+      "Fabric: Viscose Georgette & Tulle Organza",
+      "Dry clean only",
+      "Handle delicate crystal and pearl embellishments with care"
+    ],
+    delivery: [
+      "Standard dispatch: 5 to 7 business days",
+      "Custom sizing alterations available on request"
+    ],
+    features: [
+      { title: "Architectural Cape", desc: "Floor-length sheer drape with pearl borders" },
+      { title: "Swarovski Crystals", desc: "Lustrous sparkle for evening celebrations" },
+      { title: "Bespoke Boning", desc: "Structured bustier offering flawless fit" },
+      { title: "Modern Silhouette", desc: "Fusion elegance blending comfort with couture" }
+    ]
+  },
+  {
+    id: "royal-velvet-bridal-potli",
+    name: "Royal Velvet Zardozi Bridal Potli",
+    subtitle: "Handcrafted crimson-maroon velvet potli bag with heirloom gold dabka embroidery and freshwater pearl tassels.",
+    category: "Bridal Potlis",
+    section: "accessories",
+    price: 6499,
+    originalPrice: 7999,
+    discount: "19% OFF",
+    rating: 4.9,
+    reviews: 71,
+    colors: [
+      { name: "Crimson Velvet", hex: "#8A1C2C" },
+      { name: "Deep Maroon", hex: "#4A0E17" }
+    ],
+    selectedColor: "Crimson Velvet",
+    fabric: "Silk Micro Velvet & Satin",
+    sizes: ["One Size (9 x 8 inches)"],
+    images: [
+      "/images/products/accessories-velvet-potli.jpg",
+      "/images/cat-accessories.jpg"
+    ],
+    description: "The essential bridal accessory to complement your wedding lehenga. Handcrafted by master karigars on plush micro-velvet, embellished with intricate floral zardozi jaal, crystal latkans, and a pure pearl wrist handle.",
+    details: [
+      "Plush royal velvet base with soft champagne satin inner lining",
+      "Handcrafted pearl beaded wrist handle with sturdy reinforced grip",
+      "Handmade metallic dori drawstring closure with heavy matching latkans",
+      "Spacious enough for bridal essentials (smartphone, makeup touch-up, essentials)"
+    ],
+    fabricCare: [
+      "Spot clean only with soft dry cloth",
+      "Keep away from moisture and perfumes"
+    ],
+    delivery: [
+      "Dispatched within 24-48 hours",
+      "Packaged in luxury gift box"
+    ],
+    features: [
+      { title: "Pure Velvet Base", desc: "Rich royal touch matching bridal lehengas" },
+      { title: "Pearl Handle", desc: "Hand-strung cultured pearl wristlet" },
+      { title: "Heirloom Zardozi", desc: "Traditional gold bullion and sequin embroidery" },
+      { title: "Spacious Interior", desc: "Engineered to comfortably fit large smartphones" }
+    ]
+  },
+  {
+    id: "jadau-polki-choker-set",
+    name: "Jadau Polki Choker & Matha Patti Set",
+    subtitle: "24K antique gold plated royal Rajasthani bridal choker, statement matha patti, and chandelier jhumkas.",
+    category: "Bridal Jewelry",
+    section: "accessories",
+    price: 42999,
+    originalPrice: 52000,
+    discount: "17% OFF",
+    rating: 5.0,
+    reviews: 89,
+    colors: [
+      { name: "Antique Gold & Emerald", hex: "#2A5B3E" },
+      { name: "Antique Gold & Ruby", hex: "#8A1C2C" }
+    ],
+    selectedColor: "Antique Gold & Emerald",
+    fabric: "Silver-Alloy / 24K Micro Gold Plated",
+    sizes: ["Adjustable royal dori choker + free-size matha patti"],
+    images: [
+      "/images/products/accessories-jadau-choker.jpg",
+      "/images/cat-accessories.jpg"
+    ],
+    description: "A regal Rajasthani Jadau bridal jewelry set reflecting timeless royal courts. Encrusted with high-clarity uncut polki stones, deep Columbian green emerald drops, and intricate Meenakari enamel on the reverse side.",
+    details: [
+      "Complete Bridal Set includes: Heavy choker necklace, multi-tiered matha patti, chandelier jhumkas, and matching nath",
+      "Handcrafted in Jaipur using authentic Jadau setting technique",
+      "Reverse side finished with traditional peacock meenakari artwork",
+      "Anti-tarnish protective coating for lasting heirloom brilliance"
+    ],
+    fabricCare: [
+      "Wipe gently with soft cotton cloth after use",
+      "Store in the provided velvet air-tight heirloom box",
+      "Avoid contact with water, perfumes, and chemical hair sprays"
+    ],
+    delivery: [
+      "Dispatched in 2-3 business days in handcrafted velvet royal trunk",
+      "Fully insured delivery with tracking"
+    ],
+    features: [
+      { title: "Jaipur Jadau Craft", desc: "Uncut polki hand-set in pure silver alloy" },
+      { title: "Meenakari Reverse", desc: "Intricate royal Rajasthani enamel work" },
+      { title: "Full Bridal Suite", desc: "Choker, matha patti, jhumkas & matching nath" },
+      { title: "Luxury Velvet Trunk", desc: "Premium keepsake presentation box" }
     ]
   }
 ];
