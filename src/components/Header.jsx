@@ -39,6 +39,14 @@ export default function Header() {
     { name: "Contact", href: "/contact" }
   ];
 
+  const quickMobilePills = [
+    { name: "All", href: "/collections" },
+    { name: "Bridal Lehengas", href: "/lehengas" },
+    { name: "Silk Sarees", href: "/sarees" },
+    { name: "Indo-Western", href: "/indo-western" },
+    { name: "Jewelry & Potlis", href: "/accessories" }
+  ];
+
   return (
     <>
       <header
@@ -49,7 +57,7 @@ export default function Header() {
           right: 0,
           zIndex: 100,
           transition: "all 0.35s ease",
-          backgroundColor: isOverlay ? "rgba(14, 10, 10, 0.55)" : "#FAF7F2",
+          backgroundColor: isOverlay ? "rgba(14, 10, 10, 0.62)" : "#FAF7F2",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           borderBottom: isOverlay
@@ -65,7 +73,7 @@ export default function Header() {
             alignItems: "center",
             justifyContent: "space-between",
             gap: "1rem",
-            height: isScrolled ? "70px" : "82px",
+            height: isScrolled ? "66px" : "78px",
             transition: "height 0.3s ease"
           }}
         >
@@ -76,16 +84,15 @@ export default function Header() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "0.75rem",
+              gap: "0.7rem",
               textDecoration: "none",
               flexShrink: 0,
               whiteSpace: "nowrap"
             }}
           >
-            {/* Indian Floral/Sun Mandala Motif */}
             <svg
-              width="34"
-              height="34"
+              width="32"
+              height="32"
               viewBox="0 0 100 100"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +117,7 @@ export default function Header() {
               <span
                 style={{
                   fontFamily: "var(--font-serif)",
-                  fontSize: "1.75rem",
+                  fontSize: "1.7rem",
                   fontWeight: 600,
                   letterSpacing: "0.06em",
                   lineHeight: 1,
@@ -121,7 +128,7 @@ export default function Header() {
               </span>
               <span
                 style={{
-                  fontSize: "0.55rem",
+                  fontSize: "0.53rem",
                   fontWeight: 600,
                   letterSpacing: "0.22em",
                   textTransform: "uppercase",
@@ -190,7 +197,7 @@ export default function Header() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "1rem",
+              gap: "0.9rem",
               flexShrink: 0
             }}
           >
@@ -322,6 +329,60 @@ export default function Header() {
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
+        </div>
+
+        {/* Mobile Quick Category Pill Strip (1-Tap Category Switching on Mobile) */}
+        <div
+          className="mobile-category-strip"
+          style={{
+            display: "none",
+            overflowX: "auto",
+            gap: "0.5rem",
+            padding: "0.45rem 1.1rem 0.55rem",
+            borderTop: isOverlay
+              ? "1px solid rgba(255,255,255,0.1)"
+              : "1px solid rgba(197, 168, 105, 0.18)"
+          }}
+        >
+          {quickMobilePills.map((pill) => {
+            const active = pathname === pill.href;
+            return (
+              <Link
+                key={pill.name}
+                href={pill.href}
+                prefetch={false}
+                style={{
+                  padding: "0.3rem 0.78rem",
+                  borderRadius: "999px",
+                  fontSize: "0.72rem",
+                  fontWeight: active ? 700 : 500,
+                  whiteSpace: "nowrap",
+                  flexShrink: 0,
+                  backgroundColor: active
+                    ? isOverlay
+                      ? "#E5C88B"
+                      : "var(--maroon)"
+                    : isOverlay
+                    ? "rgba(255, 255, 255, 0.12)"
+                    : "#FFFFFF",
+                  color: active
+                    ? isOverlay
+                      ? "#1D1919"
+                      : "#FFFFFF"
+                    : isOverlay
+                    ? "#F5EFEA"
+                    : "var(--text-main)",
+                  border: active
+                    ? "none"
+                    : isOverlay
+                    ? "1px solid rgba(255, 255, 255, 0.2)"
+                    : "1px solid #E2D7C8"
+                }}
+              >
+                {pill.name}
+              </Link>
+            );
+          })}
         </div>
       </header>
 

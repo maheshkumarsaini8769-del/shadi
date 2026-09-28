@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Gem, Scissors, Truck, Heart, ArrowRight } from "lucide-react";
@@ -31,6 +31,7 @@ export default function HeroSection() {
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
+  const touchStartX = useRef(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -43,8 +44,29 @@ export default function HeroSection() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   const active = heroSlides[currentSlide];
 
+  const handleTouchStart = (e) => {
+    if (e.touches && e.touches.length > 0) {
+      touchStartX.current = e.touches[0].clientX;
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null || !e.changedTouches || e.changedTouches.length === 0) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 45) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+    touchStartX.current = null;
+  };
+
   return (
     <section
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       style={{
         position: "relative",
         minHeight: "100vh",
@@ -86,7 +108,7 @@ export default function HeroSection() {
         </div>
       ))}
 
-      {/* Desktop Left / Right Floating Arrows (Hidden on Mobile so they never clip) */}
+      {/* Desktop Left / Right Floating Arrows */}
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
@@ -146,8 +168,8 @@ export default function HeroSection() {
           position: "relative",
           zIndex: 5,
           flex: 1,
-          paddingTop: "7.5rem",
-          paddingBottom: "2.5rem",
+          paddingTop: "8.5rem",
+          paddingBottom: "2rem",
           display: "flex",
           flexDirection: "column",
           justifyContent: "center"
@@ -165,7 +187,7 @@ export default function HeroSection() {
             <div
               style={{
                 color: "#E5C88B",
-                fontSize: "0.82rem",
+                fontSize: "0.8rem",
                 fontWeight: 600,
                 letterSpacing: "0.24em",
                 textTransform: "uppercase",
@@ -178,13 +200,13 @@ export default function HeroSection() {
             <h1
               style={{
                 fontFamily: "var(--font-serif)",
-                fontSize: "clamp(2.5rem, 5.5vw, 4.6rem)",
+                fontSize: "clamp(2.4rem, 5.5vw, 4.6rem)",
                 fontWeight: 600,
                 lineHeight: 1.12,
                 color: "#FFFFFF",
                 letterSpacing: "0.02em",
                 whiteSpace: "pre-line",
-                marginBottom: "1.25rem",
+                marginBottom: "1.2rem",
                 textShadow: "0 2px 20px rgba(0,0,0,0.35)"
               }}
             >
@@ -193,12 +215,12 @@ export default function HeroSection() {
 
             <p
               style={{
-                fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
+                fontSize: "clamp(0.94rem, 2vw, 1.1rem)",
                 lineHeight: 1.55,
                 color: "#E8DFD9",
                 letterSpacing: "0.03em",
                 whiteSpace: "pre-line",
-                marginBottom: "2rem"
+                marginBottom: "1.85rem"
               }}
             >
               {active.subtitle}
@@ -228,13 +250,13 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Slide Indicators + Mobile Prev/Next Arrows Bar (Never overlaps or clips!) */}
+        {/* Slide Indicators + Mobile Prev/Next Arrows Bar */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            marginTop: "2.5rem",
+            marginTop: "2.25rem",
             paddingTop: "0.5rem",
             width: "100%"
           }}
@@ -276,7 +298,7 @@ export default function HeroSection() {
             ))}
           </div>
 
-          {/* Mobile Slide Arrows (Cleanly aligned inside container, zero clipping) */}
+          {/* Mobile Slide Arrows */}
           <div className="hero-mobile-arrows" style={{ display: "none", alignItems: "center", gap: "0.75rem" }}>
             <button
               onClick={prevSlide}
@@ -285,7 +307,7 @@ export default function HeroSection() {
                 width: "42px",
                 height: "42px",
                 borderRadius: "50%",
-                backgroundColor: "rgba(18, 14, 14, 0.65)",
+                backgroundColor: "rgba(18, 14, 14, 0.68)",
                 backdropFilter: "blur(6px)",
                 border: "1px solid #E5C88B",
                 color: "#FFFFFF",
@@ -304,7 +326,7 @@ export default function HeroSection() {
                 width: "42px",
                 height: "42px",
                 borderRadius: "50%",
-                backgroundColor: "rgba(18, 14, 14, 0.65)",
+                backgroundColor: "rgba(18, 14, 14, 0.68)",
                 backdropFilter: "blur(6px)",
                 border: "1px solid #E5C88B",
                 color: "#FFFFFF",
@@ -320,7 +342,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Bottom Feature Badges Strip (In normal flex flow so it never overlaps arrows) */}
+      {/* Bottom Feature Badges Strip */}
       <div
         style={{
           position: "relative",

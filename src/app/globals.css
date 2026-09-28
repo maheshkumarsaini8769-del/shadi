@@ -347,9 +347,35 @@ img {
   .mobile-menu-btn {
     display: inline-flex !important;
   }
+  .mobile-category-strip {
+    display: flex !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .mobile-category-strip::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @media (max-width: 992px) {
+  body {
+    padding-bottom: 64px;
+  }
+  .mobile-bottom-nav {
+    display: grid !important;
+  }
+  .mobile-whatsapp-fab {
+    display: flex !important;
+  }
+  .mobile-sticky-buy-bar {
+    display: flex !important;
+  }
+  .hero-desktop-arrow {
+    display: none !important;
+  }
+  .hero-mobile-arrows {
+    display: flex !important;
+  }
   .filter-sidebar-desktop {
     display: none !important;
   }
@@ -358,10 +384,6 @@ img {
   }
   .listing-layout-grid {
     grid-template-columns: 1fr !important;
-  }
-  .filter-sidebar-mobile-open {
-    display: block;
-    margin-bottom: 2rem;
   }
   .lehenga-product-grid,
   .sarees-grid,
@@ -373,20 +395,11 @@ img {
   }
   .product-detail-layout {
     grid-template-columns: 1fr !important;
-    gap: 2.5rem !important;
+    gap: 2rem !important;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr !important;
     gap: 2.5rem !important;
-  }
-}
-
-@media (max-width: 992px) {
-  .hero-desktop-arrow {
-    display: none !important;
-  }
-  .hero-mobile-arrows {
-    display: flex !important;
   }
 }
 
@@ -395,7 +408,7 @@ img {
     display: none !important;
   }
   .hero-content-wrap {
-    padding-top: 6.5rem !important;
+    padding-top: 8.5rem !important;
     padding-bottom: 2rem !important;
   }
   .collections-grid,
@@ -462,21 +475,33 @@ img {
   .toast-notification {
     left: 1rem;
     right: 1rem;
-    bottom: 1rem;
+    bottom: 4.75rem;
   }
-}
-
-@media (max-width: 480px) {
-  .collections-grid,
-  .collections-page-grid,
   .featured-products-grid,
   .lehenga-product-grid,
   .sarees-grid,
   .indo-western-grid,
   .accessories-grid,
   .related-products-grid {
-    grid-template-columns: 1fr !important;
-    gap: 1.15rem !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+  .product-card-body {
+    padding: 0.65rem 0.65rem 0.75rem !important;
+  }
+  .product-card-title {
+    font-size: 0.92rem !important;
+  }
+  .product-card-price {
+    font-size: 0.92rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .collections-grid,
+  .collections-page-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.7rem !important;
   }
   .product-cta-row {
     flex-direction: column !important;
@@ -486,4 +511,5 @@ img {
     gap: 0.6rem !important;
   }
 }
+
 

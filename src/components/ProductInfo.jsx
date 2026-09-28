@@ -455,7 +455,50 @@ export default function ProductInfo({ product }) {
         </div>
       </div>
 
-      
+      {/* Sticky Mobile Add to Bag / Buy Now Bar (Visible on Mobile <= 992px) */}
+      <div
+        className="mobile-sticky-buy-bar"
+        style={{
+          position: "fixed",
+          bottom: "64px",
+          left: 0,
+          right: 0,
+          zIndex: 880,
+          backgroundColor: "#FFFFFF",
+          borderTop: "1px solid #ECE3D6",
+          padding: "0.65rem 1rem",
+          boxShadow: "0 -4px 16px rgba(0,0,0,0.08)",
+          display: "none",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "0.75rem"
+        }}
+      >
+        <div>
+          <div style={{ fontSize: "0.68rem", color: "var(--text-secondary)", textTransform: "uppercase" }}>
+            Price ({selectedSize})
+          </div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--maroon)", lineHeight: 1.1 }}>
+            {formatPrice(product.price)}
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: "0.5rem", flex: 1, maxWidth: "240px" }}>
+          <button
+            type="button"
+            onClick={() => addToCart(product, selectedSize, selectedColor, quantity)}
+            className="btn-primary"
+            style={{
+              flex: 1,
+              padding: "0.7rem 0.6rem",
+              fontSize: "0.74rem",
+              letterSpacing: "0.08em"
+            }}
+          >
+            ADD TO BAG
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

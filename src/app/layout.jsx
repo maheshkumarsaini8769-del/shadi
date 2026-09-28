@@ -1,4 +1,4 @@
-﻿import "./globals.css";
+import "./globals.css";
 import { ShopProvider } from "@/context/ShopContext";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,6 +8,14 @@ import AppointmentModal from "@/components/AppointmentModal";
 import SizeGuideModal from "@/components/SizeGuideModal";
 import SearchModal from "@/components/SearchModal";
 import Toast from "@/components/Toast";
+import MobileBottomNav from "@/components/MobileBottomNav";
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#731A2B"
+};
 
 export const metadata = {
   title: "Shadi — For Her Big Day | Luxury Indian Bridal & Wedding Couture",
@@ -35,6 +43,7 @@ export default function RootLayout({ children }) {
           <SizeGuideModal />
           <SearchModal />
           <Toast />
+          <MobileBottomNav />
         </ShopProvider>
       </body>
     </html>

@@ -3,11 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart, ShoppingBag } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 
 export default function ProductCard({ product }) {
-  const { toggleWishlist, isInWishlist } = useShop();
+  const { addToCart, toggleWishlist, isInWishlist } = useShop();
   const isFavorite = isInWishlist(product.id);
 
   // Format currency in Indian Rupees
@@ -30,14 +30,14 @@ export default function ProductCard({ product }) {
       }}
       className="product-card"
     >
-      {/* Image Container with 3:4 or 4:5 Aspect Ratio */}
+      {/* Image Container with 3:4 Aspect Ratio */}
       <Link
         href={`/product/${product.id}`}
         prefetch={false}
         style={{
           position: "relative",
           width: "100%",
-          paddingTop: "135%",
+          paddingTop: "132%",
           overflow: "hidden",
           backgroundColor: "#F7F2EB",
           display: "block"
@@ -61,14 +61,14 @@ export default function ProductCard({ product }) {
           <span
             style={{
               position: "absolute",
-              top: "10px",
-              left: "10px",
+              top: "8px",
+              left: "8px",
               backgroundColor: "var(--maroon)",
               color: "#FFFFFF",
-              fontSize: "0.68rem",
+              fontSize: "0.65rem",
               fontWeight: 600,
               letterSpacing: "0.05em",
-              padding: "0.25rem 0.6rem",
+              padding: "0.22rem 0.5rem",
               borderRadius: "2px",
               zIndex: 2
             }}
@@ -88,10 +88,10 @@ export default function ProductCard({ product }) {
         aria-label="Add to Wishlist"
         style={{
           position: "absolute",
-          top: "10px",
-          right: "10px",
+          top: "8px",
+          right: "8px",
           zIndex: 3,
-          backgroundColor: "rgba(255, 255, 255, 0.85)",
+          backgroundColor: "rgba(255, 255, 255, 0.88)",
           backdropFilter: "blur(4px)",
           width: "32px",
           height: "32px",
@@ -113,8 +113,9 @@ export default function ProductCard({ product }) {
 
       {/* Content */}
       <div
+        className="product-card-body"
         style={{
-          padding: "1rem 1rem 1.25rem",
+          padding: "0.85rem 0.85rem 0.95rem",
           display: "flex",
           flexDirection: "column",
           flex: 1
@@ -126,13 +127,14 @@ export default function ProductCard({ product }) {
           style={{ textDecoration: "none" }}
         >
           <h4
+            className="product-card-title"
             style={{
               fontFamily: "var(--font-serif)",
-              fontSize: "1.08rem",
+              fontSize: "1.05rem",
               fontWeight: 600,
               color: "var(--text-main)",
-              marginBottom: "0.4rem",
-              lineHeight: 1.35,
+              marginBottom: "0.35rem",
+              lineHeight: 1.3,
               display: "-webkit-box",
               WebkitLineClamp: 1,
               WebkitBoxOrient: "vertical",
@@ -144,11 +146,12 @@ export default function ProductCard({ product }) {
         </Link>
 
         {/* Price Row */}
-        <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginTop: "auto" }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", flexWrap: "wrap", marginTop: "auto" }}>
           <span
+            className="product-card-price"
             style={{
               fontFamily: "var(--font-sans)",
-              fontSize: "1.05rem",
+              fontSize: "1rem",
               fontWeight: 700,
               color: "var(--maroon)"
             }}
@@ -159,7 +162,7 @@ export default function ProductCard({ product }) {
           {product.originalPrice && (
             <span
               style={{
-                fontSize: "0.82rem",
+                fontSize: "0.75rem",
                 color: "var(--text-muted)",
                 textDecoration: "line-through"
               }}
@@ -168,9 +171,33 @@ export default function ProductCard({ product }) {
             </span>
           )}
         </div>
-      </div>
 
-      
+        {/* Quick 1-Tap Add to Bag Button */}
+        <button
+          type="button"
+          onClick={() => addToCart(product, product.sizes ? product.sizes[0] : "M")}
+          style={{
+            marginTop: "0.65rem",
+            width: "100%",
+            padding: "0.5rem 0.6rem",
+            backgroundColor: "#FAF7F2",
+            border: "1px solid #DFD5C8",
+            borderRadius: "2px",
+            color: "var(--maroon)",
+            fontSize: "0.74rem",
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+            textTransform: "uppercase",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0.4rem"
+          }}
+        >
+          <ShoppingBag size={13} />
+          <span>Add to Bag</span>
+        </button>
+      </div>
     </div>
   );
 }
