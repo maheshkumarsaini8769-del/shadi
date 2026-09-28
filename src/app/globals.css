@@ -381,36 +381,27 @@ img {
   }
 }
 
+@media (max-width: 992px) {
+  .hero-desktop-arrow {
+    display: none !important;
+  }
+  .hero-mobile-arrows {
+    display: flex !important;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-quote-box {
     display: none !important;
   }
-  .hero-arrow-btn {
-    width: 36px !important;
-    height: 36px !important;
-    top: auto !important;
-    bottom: 9.5rem !important;
-    transform: none !important;
-  }
-  .hero-arrow-prev {
-    left: auto !important;
-    right: 4.5rem !important;
-  }
-  .hero-arrow-next {
-    right: 1.25rem !important;
-  }
   .hero-content-wrap {
     padding-top: 6.5rem !important;
-    padding-bottom: 12rem !important;
+    padding-bottom: 2rem !important;
   }
   .collections-grid,
   .collections-page-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.85rem !important;
-  }
-  .hero-indicator-pos {
-    bottom: 10.2rem !important;
-    left: 1.25rem !important;
   }
   .collection-detail-row {
     grid-template-columns: 1fr !important;

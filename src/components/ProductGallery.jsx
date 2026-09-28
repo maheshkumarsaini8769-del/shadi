@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function ProductGallery({ images, name }) {
   const imageList = images && images.length > 0 ? images : [
@@ -15,6 +16,14 @@ export default function ProductGallery({ images, name }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+
+  const prevImage = () => {
+    setActiveIndex((prev) => (prev - 1 + imageList.length) % imageList.length);
+  };
+
+  const nextImage = () => {
+    setActiveIndex((prev) => (prev + 1) % imageList.length);
+  };
 
   const handleMouseMove = (e) => {
     const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -33,7 +42,7 @@ export default function ProductGallery({ images, name }) {
       }}
       className="product-gallery-grid"
     >
-      {/* 5 Vertical Thumbnails */}
+      {/* Vertical / Horizontal Thumbnails */}
       <div
         style={{
           display: "flex",
@@ -73,7 +82,7 @@ export default function ProductGallery({ images, name }) {
         })}
       </div>
 
-      {/* Large Main Image with Zoom Effect */}
+      {/* Large Main Image with Zoom Effect & Prev/Next Arrows */}
       <div
         onMouseEnter={() => setIsZoomed(true)}
         onMouseLeave={() => setIsZoomed(false)}
@@ -81,7 +90,7 @@ export default function ProductGallery({ images, name }) {
         style={{
           position: "relative",
           width: "100%",
-          paddingTop: "135%", // Match reference proportions
+          paddingTop: "135%",
           overflow: "hidden",
           borderRadius: "2px",
           border: "1px solid #EAE0D4",
@@ -104,28 +113,88 @@ export default function ProductGallery({ images, name }) {
           }}
         />
 
+        {imageList.length > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+              aria-label="Previous Image"
+              style={{
+                position: "absolute",
+                left: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                zIndex: 10,
+                width: "38px",
+                height: "38px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                border: "1px solid #DFD5C8",
+                color: "var(--text-main)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.12)",
+                flexShrink: 0
+              }}
+            >
+              <ChevronLeft size={20} style={{ flexShrink: 0 }} />
+            </button>
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+              aria-label="Next Image"
+              style={{
+                position: "absolute",
+                right: "12px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                zIndex: 10,
+                width: "38px",
+                height: "38px",
+                borderRadius: "50%",
+                backgroundColor: "rgba(255, 255, 255, 0.9)",
+                border: "1px solid #DFD5C8",
+                color: "var(--text-main)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                boxShadow: "0 2px 10px rgba(0,0,0,0.12)",
+                flexShrink: 0
+              }}
+            >
+              <ChevronRight size={20} style={{ flexShrink: 0 }} />
+            </button>
+          </>
+        )}
+
         {/* Subtle Watermark or Badge */}
         <div
           style={{
             position: "absolute",
-            bottom: "16px",
-            right: "16px",
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            bottom: "14px",
+            right: "14px",
+            backgroundColor: "rgba(255, 255, 255, 0.85)",
             backdropFilter: "blur(4px)",
-            padding: "0.3rem 0.75rem",
+            padding: "0.28rem 0.65rem",
             borderRadius: "2px",
             fontSize: "0.68rem",
-            letterSpacing: "0.1em",
+            letterSpacing: "0.08em",
             textTransform: "uppercase",
             color: "var(--text-secondary)",
             pointerEvents: "none"
           }}
         >
-          Hover to Zoom
+          {activeIndex + 1} / {imageList.length}
         </div>
       </div>
-
-      
     </div>
   );
 }
