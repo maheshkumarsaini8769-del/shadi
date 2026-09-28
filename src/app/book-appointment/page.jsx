@@ -72,6 +72,7 @@ export default function BookAppointmentPage() {
         </div>
 
         <div
+          className="responsive-card-pad"
           style={{
             maxWidth: "760px",
             margin: "0 auto",

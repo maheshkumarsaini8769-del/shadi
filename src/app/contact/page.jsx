@@ -80,6 +80,7 @@ export default function ContactPage() {
         >
           {/* Left: Showroom Details */}
           <div
+            className="responsive-card-pad"
             style={{
               backgroundColor: "#FFFFFF",
               padding: "2.5rem",
@@ -174,6 +175,7 @@ export default function ContactPage() {
 
           {/* Right: Contact Form */}
           <div
+            className="responsive-card-pad"
             style={{
               backgroundColor: "#FFFFFF",
               padding: "2.5rem",
@@ -239,7 +241,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }} className="form-row-2">
                   <div>
                     <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
                       Phone / WhatsApp *

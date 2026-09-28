@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -87,6 +87,7 @@ export default function HeroSection() {
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
+        className="hero-arrow-btn hero-arrow-prev"
         style={{
           position: "absolute",
           left: "1.5rem",
@@ -111,6 +112,7 @@ export default function HeroSection() {
       <button
         onClick={nextSlide}
         aria-label="Next Slide"
+        className="hero-arrow-btn hero-arrow-next"
         style={{
           position: "absolute",
           right: "1.5rem",
@@ -133,7 +135,7 @@ export default function HeroSection() {
       </button>
 
       <div
-        className="container"
+        className="container hero-content-wrap"
         style={{
           position: "relative",
           zIndex: 5,
@@ -266,7 +268,7 @@ export default function HeroSection() {
         }}
       >
         <div
-          className="container"
+          className="container feature-badges-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",

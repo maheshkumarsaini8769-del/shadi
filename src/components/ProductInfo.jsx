@@ -221,7 +221,7 @@ export default function ProductInfo({ product }) {
 
       {/* Quantity & CTA Buttons */}
       <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem", marginTop: "0.5rem" }}>
-        <div style={{ display: "flex", gap: "0.85rem" }}>
+        <div style={{ display: "flex", gap: "0.85rem" }} className="product-cta-row">
           <button
             onClick={() => addToCart(product, selectedSize, selectedColor, quantity)}
             className="btn-primary"
@@ -254,6 +254,7 @@ export default function ProductInfo({ product }) {
 
       {/* Trust Badges Strip (Reference match) */}
       <div
+        className="trust-badges-strip"
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
@@ -292,11 +293,13 @@ export default function ProductInfo({ product }) {
       {/* Tabs Section */}
       <div style={{ marginTop: "0.5rem" }}>
         <div
+          className="product-tabs-row"
           style={{
             display: "flex",
             gap: "2rem",
             borderBottom: "1px solid #ECE3D6",
-            paddingBottom: "0.6rem"
+            paddingBottom: "0.6rem",
+            flexWrap: "wrap"
           }}
         >
           {["details", "fabric & care", "delivery", "reviews"].map((tab) => {

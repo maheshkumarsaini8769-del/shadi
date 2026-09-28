@@ -118,7 +118,7 @@ export default function AboutPage() {
               Our atelier brings together four generations of master zardozi karigars, silk weavers from Varanasi and Kanchipuram, and modern bridal couturiers. Every lehenga skirt requires between 140 to 220 hours of concentrated hand needlework, ensuring no two creations are ever entirely identical.
             </p>
 
-            <div style={{ display: "flex", gap: "2rem", borderTop: "1px solid #ECE3D6", paddingTop: "1.5rem" }}>
+            <div className="about-stats-row" style={{ display: "flex", gap: "2rem", borderTop: "1px solid #ECE3D6", paddingTop: "1.5rem", flexWrap: "wrap" }}>
               <div>
                 <div style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", fontWeight: 700, color: "var(--maroon)" }}>
                   10,000+
@@ -163,6 +163,7 @@ export default function AboutPage() {
 
         {/* 4 Pillars of Shadi */}
         <div
+          className="responsive-card-pad"
           style={{
             backgroundColor: "#FFFFFF",
             padding: "4rem 3rem",
