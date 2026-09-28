@@ -231,7 +231,7 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* CTA to Book Appointment */}
+        {/* CTA to Shop Collection */}
         <div
           style={{
             backgroundColor: "#161313",
@@ -246,16 +246,16 @@ export default function AboutPage() {
           }}
         >
           <span style={{ fontSize: "0.8rem", color: "var(--gold)", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            BEGIN YOUR BRIDAL JOURNEY
+            BEGIN YOUR BRIDAL SHOPPING
           </span>
           <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "2.4rem", fontWeight: 600, maxWidth: "600px" }}>
-            Experience the Magic of Shadi in Person
+            Order Your Dream Wedding Outfit Online
           </h3>
           <p style={{ fontSize: "0.95rem", color: "#B8AEA8", maxWidth: "540px" }}>
-            Visit our flagship Rajasthan showroom or connect with our master bridal stylists via private virtual appointments.
+            Explore our complete range of bridal lehengas, handloom silk sarees, and royal accessories with custom stitching &amp; free insured delivery.
           </p>
-          <Link href="/book-appointment" prefetch={false} className="btn-gold" style={{ marginTop: "0.5rem" }}>
-            <span>SCHEDULE BRIDAL CONSULTATION</span>
+          <Link href="/lehengas" prefetch={false} className="btn-gold" style={{ marginTop: "0.5rem" }}>
+            <span>SHOP BRIDAL COLLECTION</span>
             <ArrowRight size={16} />
           </Link>
         </div>

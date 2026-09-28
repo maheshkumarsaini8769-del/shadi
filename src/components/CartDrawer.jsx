@@ -1,13 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
+import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 import { useShop } from "@/context/ShopContext";
 
 export default function CartDrawer() {
-  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateCartQuantity, cartTotal } = useShop();
+  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateCartQuantity, clearCart, cartTotal } = useShop();
+  const [step, setStep] = useState("bag"); // "bag" | "checkout" | "confirmed"
+  const [orderDetails, setOrderDetails] = useState({
+    name: "",
+    phone: "",
+    address: "",
+    city: "",
+    pincode: "",
+    paymentMethod: "UPI / QR (GPay, PhonePe, Paytm)"
+  });
+  const [orderId, setOrderId] = useState("");
+  const [confirmedTotal, setConfirmedTotal] = useState(0);
 
   if (!isCartOpen) return null;
 
@@ -17,36 +28,51 @@ export default function CartDrawer() {
 
   const formatPrice = (amt) => "₹" + amt.toLocaleString("en-IN");
 
+  const handleClose = () => {
+    setIsCartOpen(false);
+    setTimeout(() => {
+      setStep("bag");
+    }, 300);
+  };
+
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+    const generatedId = "SHADI-ORD-" + Math.floor(100000 + Math.random() * 900000);
+    setOrderId(generatedId);
+    setConfirmedTotal(cartTotal);
+    clearCart();
+    setStep("confirmed");
+  };
+
   return (
     <div
       style={{
         position: "fixed",
         inset: 0,
-        zIndex: 1000,
-        backgroundColor: "rgba(16, 13, 13, 0.7)",
-        backdropFilter: "blur(4px)",
+        zIndex: 1100,
+        backgroundColor: "rgba(16, 13, 13, 0.72)",
+        backdropFilter: "blur(5px)",
         display: "flex",
         justifyContent: "flex-end"
       }}
-      onClick={() => setIsCartOpen(false)}
+      onClick={handleClose}
     >
       <div
         style={{
           width: "100%",
-          maxWidth: "440px",
+          maxWidth: "450px",
           height: "100%",
           backgroundColor: "#FAF7F2",
           display: "flex",
           flexDirection: "column",
-          boxShadow: "-8px 0 30px rgba(0,0,0,0.2)",
-          animation: "slideLeft 0.3s ease forwards"
+          boxShadow: "-8px 0 30px rgba(0,0,0,0.22)"
         }}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div
           style={{
-            padding: "1.5rem",
+            padding: "1.35rem 1.5rem",
             borderBottom: "1px solid #ECE3D6",
             display: "flex",
             alignItems: "center",
@@ -55,13 +81,25 @@ export default function CartDrawer() {
           }}
         >
           <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-            <ShoppingBag size={20} style={{ color: "var(--maroon)" }} />
+            {step === "checkout" ? (
+              <button
+                onClick={() => setStep("bag")}
+                style={{ color: "var(--text-main)", display: "flex", alignItems: "center", paddingRight: "0.25rem" }}
+                aria-label="Back to bag"
+              >
+                <ArrowLeft size={19} />
+              </button>
+            ) : (
+              <ShoppingBag size={20} style={{ color: "var(--maroon)" }} />
+            )}
             <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "1.4rem", fontWeight: 600 }}>
-              Shopping Bag ({cart.reduce((a, b) => a + b.quantity, 0)})
+              {step === "bag" && `Shopping Bag (${cart.reduce((a, b) => a + b.quantity, 0)})`}
+              {step === "checkout" && "Express Bridal Checkout"}
+              {step === "confirmed" && "Order Confirmed"}
             </h3>
           </div>
           <button
-            onClick={() => setIsCartOpen(false)}
+            onClick={handleClose}
             style={{ color: "var(--text-main)", padding: "0.3rem" }}
             aria-label="Close"
           >
@@ -70,46 +108,48 @@ export default function CartDrawer() {
         </div>
 
         {/* Free Shipping Meter */}
-        <div
-          style={{
-            padding: "0.85rem 1.5rem",
-            backgroundColor: "var(--blush)",
-            fontSize: "0.8rem",
-            color: "var(--maroon-dark)"
-          }}
-        >
-          {remainingForFree > 0 ? (
-            <div>
-              Add <strong>{formatPrice(remainingForFree)}</strong> more to get{" "}
-              <strong>FREE Insured Pan-India Delivery</strong>
-            </div>
-          ) : (
-            <div style={{ fontWeight: 600 }}>
-              🎉 Congratulations! You have unlocked <strong>FREE Insured Shipping</strong>
-            </div>
-          )}
+        {step === "bag" && (
           <div
             style={{
-              width: "100%",
-              height: "4px",
-              backgroundColor: "rgba(115, 26, 43, 0.15)",
-              borderRadius: "2px",
-              marginTop: "0.4rem",
-              overflow: "hidden"
+              padding: "0.85rem 1.5rem",
+              backgroundColor: "var(--blush)",
+              fontSize: "0.8rem",
+              color: "var(--maroon-dark)"
             }}
           >
+            {remainingForFree > 0 ? (
+              <div>
+                Add <strong>{formatPrice(remainingForFree)}</strong> more to get{" "}
+                <strong>FREE Insured Pan-India Delivery</strong>
+              </div>
+            ) : (
+              <div style={{ fontWeight: 600 }}>
+                🎉 Congratulations! You have unlocked <strong>FREE Insured Shipping</strong>
+              </div>
+            )}
             <div
               style={{
-                width: `${progressPercent}%`,
-                height: "100%",
-                backgroundColor: "var(--maroon)",
-                transition: "width 0.4s ease"
+                width: "100%",
+                height: "4px",
+                backgroundColor: "rgba(115, 26, 43, 0.15)",
+                borderRadius: "2px",
+                marginTop: "0.4rem",
+                overflow: "hidden"
               }}
-            />
+            >
+              <div
+                style={{
+                  width: `${progressPercent}%`,
+                  height: "100%",
+                  backgroundColor: "var(--maroon)",
+                  transition: "width 0.4s ease"
+                }}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* Cart Item List */}
+        {/* Body Content */}
         <div
           style={{
             flex: 1,
@@ -120,7 +160,198 @@ export default function CartDrawer() {
             gap: "1.2rem"
           }}
         >
-          {cart.length === 0 ? (
+          {step === "confirmed" ? (
+            <div
+              style={{
+                textAlign: "center",
+                margin: "auto 0",
+                padding: "1.5rem 0.5rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "1rem"
+              }}
+            >
+              <CheckCircle2 size={58} style={{ color: "var(--maroon)" }} />
+              <h4 style={{ fontFamily: "var(--font-serif)", fontSize: "1.75rem", fontWeight: 600 }}>
+                Thank You for Your Order!
+              </h4>
+              <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>
+                Dear <strong>{orderDetails.name}</strong>, your bridal order has been placed and is being prepared by our Rajasthan atelier.
+              </p>
+
+              <div
+                style={{
+                  width: "100%",
+                  backgroundColor: "#FFFFFF",
+                  border: "1px dashed var(--gold)",
+                  padding: "1.1rem",
+                  borderRadius: "2px",
+                  fontSize: "0.84rem",
+                  textAlign: "left",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.45rem"
+                }}
+              >
+                <div>
+                  <span style={{ color: "var(--text-secondary)" }}>Order ID: </span>
+                  <strong style={{ color: "var(--maroon)" }}>{orderId}</strong>
+                </div>
+                <div>
+                  <span style={{ color: "var(--text-secondary)" }}>Total Amount: </span>
+                  <strong>{formatPrice(confirmedTotal)}</strong>
+                </div>
+                <div>
+                  <span style={{ color: "var(--text-secondary)" }}>Payment Mode: </span>
+                  <strong>{orderDetails.paymentMethod}</strong>
+                </div>
+                <div>
+                  <span style={{ color: "var(--text-secondary)" }}>Delivering To: </span>
+                  <strong>{orderDetails.address}, {orderDetails.city} - {orderDetails.pincode}</strong>
+                </div>
+              </div>
+
+              <button
+                onClick={handleClose}
+                className="btn-primary"
+                style={{ width: "100%", marginTop: "0.5rem" }}
+              >
+                Continue Shopping
+              </button>
+            </div>
+          ) : step === "checkout" ? (
+            <form id="checkout-form" onSubmit={handlePlaceOrder} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <div>
+                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Ananya Sharma"
+                  value={orderDetails.name}
+                  onChange={(e) => setOrderDetails({ ...orderDetails, name: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    border: "1px solid #DFD5C8",
+                    backgroundColor: "#FFFFFF",
+                    fontSize: "0.86rem",
+                    borderRadius: "2px"
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                  Phone / WhatsApp Number (for Order Tracking) *
+                </label>
+                <input
+                  type="tel"
+                  required
+                  placeholder="+91 98765 43210"
+                  value={orderDetails.phone}
+                  onChange={(e) => setOrderDetails({ ...orderDetails, phone: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    border: "1px solid #DFD5C8",
+                    backgroundColor: "#FFFFFF",
+                    fontSize: "0.86rem",
+                    borderRadius: "2px"
+                  }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                  Complete Delivery Address *
+                </label>
+                <textarea
+                  rows={2}
+                  required
+                  placeholder="House/Flat No., Street, Landmark"
+                  value={orderDetails.address}
+                  onChange={(e) => setOrderDetails({ ...orderDetails, address: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    border: "1px solid #DFD5C8",
+                    backgroundColor: "#FFFFFF",
+                    fontSize: "0.86rem",
+                    borderRadius: "2px",
+                    fontFamily: "inherit"
+                  }}
+                />
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.85rem" }}>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                    City *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Jaipur"
+                    value={orderDetails.city}
+                    onChange={(e) => setOrderDetails({ ...orderDetails, city: e.target.value })}
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      border: "1px solid #DFD5C8",
+                      backgroundColor: "#FFFFFF",
+                      fontSize: "0.86rem",
+                      borderRadius: "2px"
+                    }}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                    Pincode *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="302001"
+                    value={orderDetails.pincode}
+                    onChange={(e) => setOrderDetails({ ...orderDetails, pincode: e.target.value })}
+                    style={{
+                      width: "100%",
+                      padding: "0.75rem",
+                      border: "1px solid #DFD5C8",
+                      backgroundColor: "#FFFFFF",
+                      fontSize: "0.86rem",
+                      borderRadius: "2px"
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label style={{ display: "block", fontSize: "0.8rem", fontWeight: 600, marginBottom: "0.3rem" }}>
+                  Payment Method *
+                </label>
+                <select
+                  value={orderDetails.paymentMethod}
+                  onChange={(e) => setOrderDetails({ ...orderDetails, paymentMethod: e.target.value })}
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem",
+                    border: "1px solid #DFD5C8",
+                    backgroundColor: "#FFFFFF",
+                    fontSize: "0.86rem",
+                    borderRadius: "2px"
+                  }}
+                >
+                  <option value="UPI / QR (GPay, PhonePe, Paytm)">UPI / QR (GPay, PhonePe, Paytm)</option>
+                  <option value="Credit / Debit Card / NetBanking">Credit / Debit Card / NetBanking</option>
+                  <option value="Cash on Delivery (COD)">Cash on Delivery (COD)</option>
+                </select>
+              </div>
+            </form>
+          ) : cart.length === 0 ? (
             <div
               style={{
                 textAlign: "center",
@@ -149,15 +380,15 @@ export default function CartDrawer() {
                 Your bag is empty
               </h4>
               <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", maxWidth: "260px" }}>
-                Explore our royal wedding collections to discover your dream outfit.
+                Explore our royal wedding collections to buy your dream bridal outfit.
               </p>
               <Link
                 href="/lehengas"
-                onClick={() => setIsCartOpen(false)}
+                onClick={handleClose}
                 className="btn-primary"
                 style={{ marginTop: "0.5rem" }}
               >
-                Explore Lehengas
+                Shop Bridal Lehengas
               </Link>
             </div>
           ) : (
@@ -251,52 +482,68 @@ export default function CartDrawer() {
         </div>
 
         {/* Footer / Summary */}
-        {cart.length > 0 && (
+        {cart.length > 0 && step !== "confirmed" && (
           <div
             style={{
-              padding: "1.5rem",
+              padding: "1.35rem 1.5rem",
               borderTop: "1px solid #ECE3D6",
               backgroundColor: "#FFFFFF",
               display: "flex",
               flexDirection: "column",
-              gap: "0.85rem"
+              gap: "0.75rem"
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem" }}>
-              <span style={{ color: "var(--text-secondary)" }}>Subtotal</span>
-              <span style={{ fontWeight: 700, color: "var(--text-main)", fontSize: "1.1rem" }}>
+              <span style={{ color: "var(--text-secondary)" }}>Order Total</span>
+              <span style={{ fontWeight: 700, color: "var(--text-main)", fontSize: "1.15rem" }}>
                 {formatPrice(cartTotal)}
               </span>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8rem", color: "var(--text-muted)" }}>
-              <span>Taxes &amp; Pan-India Shipping</span>
-              <span>Calculated at checkout</span>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.78rem", color: "var(--text-muted)" }}>
+              <span>Insured Pan-India Delivery</span>
+              <span style={{ color: "#1D5236", fontWeight: 600 }}>FREE</span>
             </div>
 
-            <button
-              onClick={() => {
-                alert("Proceeding to secure checkout! In live production, this connects to Razorpay/Stripe.");
-              }}
-              className="btn-primary"
-              style={{
-                width: "100%",
-                padding: "1.1rem",
-                marginTop: "0.4rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.6rem"
-              }}
-            >
-              <span>PROCEED TO CHECKOUT</span>
-              <ArrowRight size={16} />
-            </button>
+            {step === "bag" ? (
+              <button
+                onClick={() => setStep("checkout")}
+                className="btn-primary"
+                style={{
+                  width: "100%",
+                  padding: "1rem",
+                  marginTop: "0.25rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem"
+                }}
+              >
+                <span>PROCEED TO CHECKOUT</span>
+                <ArrowRight size={16} />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                form="checkout-form"
+                className="btn-primary"
+                style={{
+                  width: "100%",
+                  padding: "1rem",
+                  marginTop: "0.25rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem"
+                }}
+              >
+                <span>PLACE ORDER NOW ({formatPrice(cartTotal)})</span>
+                <ArrowRight size={16} />
+              </button>
+            )}
           </div>
         )}
       </div>
-
-      
     </div>
   );
 }

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
@@ -118,6 +118,10 @@ export function ShopProvider({ children }) {
     return wishlist.some((item) => item.id === productId);
   };
 
+  const clearCart = () => {
+    setCart([]);
+  };
+
   const cartTotal = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const wishlistCount = wishlist.length;
@@ -129,6 +133,7 @@ export function ShopProvider({ children }) {
         addToCart,
         removeFromCart,
         updateCartQuantity,
+        clearCart,
         cartTotal,
         cartCount,
         wishlist,

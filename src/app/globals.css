@@ -339,13 +339,20 @@ img {
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
   .desktop-nav,
-  .appointment-btn,
+  .appointment-btn {
+    display: none !important;
+  }
+  .mobile-menu-btn {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 992px) {
   .filter-sidebar-desktop {
     display: none !important;
   }
-  .mobile-menu-btn,
   .mobile-filter-trigger {
     display: inline-flex !important;
   }

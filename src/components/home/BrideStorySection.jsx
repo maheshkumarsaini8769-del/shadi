@@ -1,13 +1,11 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
-import { useShop } from "@/context/ShopContext";
+import Link from "next/link";
 import { Sparkles, Scissors, Crown, Heart, ArrowRight } from "lucide-react";
 
 export default function BrideStorySection() {
-  const { setIsAppointmentOpen } = useShop();
-
   return (
     <section
       style={{
@@ -38,7 +36,7 @@ export default function BrideStorySection() {
                   color: "var(--maroon)"
                 }}
               >
-                BESPOKE ATELIER
+                ROYAL BRIDAL BOUTIQUE
               </span>
 
               <h2
@@ -65,24 +63,23 @@ export default function BrideStorySection() {
                   marginTop: "0.6rem"
                 }}
               >
-                Let Us Be a Part of Yours
+                Find Your Dream Wedding Outfit Online
               </p>
             </div>
 
             <p style={{ fontSize: "0.92rem", color: "var(--text-secondary)", lineHeight: 1.7 }}>
-              Step into an intimate sanctuary where your wedding dreams are translated into reality.
-              From handpicking royal zardozi threads to personalized drape consultations, our bridal specialists
-              accompany you on every step of your bridal journey.
+              Order authentic Rajasthani zardozi bridal lehengas, Kanjeevaram silk sarees, and royal jewelry directly from our atelier. Every order includes custom size stitching and free insured doorstep delivery across India.
             </p>
 
             <div>
-              <button
-                onClick={() => setIsAppointmentOpen(true)}
+              <Link
+                href="/lehengas"
+                prefetch={false}
                 className="btn-blush"
               >
-                <span>BOOK APPOINTMENT</span>
+                <span>SHOP BRIDAL COLLECTION</span>
                 <ArrowRight size={16} strokeWidth={2} />
-              </button>
+              </Link>
             </div>
           </div>
 
